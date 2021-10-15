@@ -4,7 +4,8 @@
  */
 
 #include "mbed.h"
-#include "platform/mbed_thread.h"
+#include <cstdio>
+//#include "platform/mbed_thread.h"
 
 
 // Blinking rate in milliseconds
@@ -12,13 +13,14 @@
 #define BLINKING_RATE2     300000
 #define BLINKING_RATE3     100000
 
-Thread thread1;
-Thread thread2;
-Thread thread3;
-
 DigitalOut led1(LED1);
 DigitalOut led2(LED2);
 DigitalOut led3(LED3);
+
+Thread thread1;
+Thread thread2;
+Thread thread3;
+Thread thread4;
 
 void led1_thread()
 {
@@ -47,6 +49,21 @@ void led3_thread()
     }
 }
 
+void print_thread()
+{
+    while (true)
+    {
+        printf("Ra da da da da da da da Circus\n");
+        wait_us(200000);
+        printf("Da da da da da da da da Afro\n");
+        wait_us(200000);
+        printf("Circus, Afro Circus, Afro\n");
+        wait_us(200000);
+        printf("Polka dot, polka dot, polka dot, Afro!\n");
+        wait_us(500000);
+    }
+}
+
 
 int main()
 {
@@ -55,5 +72,6 @@ int main()
     thread1.start(led1_thread);
     thread2.start(led2_thread);
     thread3.start(led3_thread);
+    thread4.start(print_thread);
 
 }
